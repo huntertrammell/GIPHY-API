@@ -7,7 +7,7 @@ var btnClassArr = ["color-1", "color-2", "color-3", "color-4", "color-5", "color
 function displayGifs () {
     var API_KEY = "aa5D0fZ0j07riJgexlaxj60yO0nf9TnV";
     var topic = $(this).attr("data")
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&limit=18&api_key=" + API_KEY
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&limit=18&api_key=" + API_KEY
     console.log(queryURL)
     $("#gifResults").empty();
     $.ajax({
@@ -20,6 +20,7 @@ function displayGifs () {
         if (results[i].rating !== 'r' && results[i].rating !== 'pg-13') {
             var gifImg = $('<img>')
             gifImg.attr('src', results[i].images.fixed_height_still.url).attr('id', "gif").addClass("rounded float-left m-2").attr('data-still', results[i].images.fixed_height_still.url).attr('data-animate', results[i].images.fixed_height.url).attr('data-state', "still")
+            //gifImg.append('<a href="#" onclick="prepHref(this)" download><i class="fas fa-download"></i></a>')
             $('#gifResults').prepend(gifImg)
             animate()
             }
