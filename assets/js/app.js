@@ -1,5 +1,4 @@
-//define global variables
-//create QUery URL
+
 
 var buttonArr = ["Taco Bell", "Batman", "Corgi", "My Hero Academia", "Metallica", "Space Jam", "Demolition Man", "The Office", "Rage Quit", "Bernie Sanders", "Thumbs Up", "Mr.Bean", "Adventure Time", "Anime", "Dragons", "Captain Marvel", "Mass Effect", "Snoop Dogg"]
 var btnClassArr = ["color-1", "color-2", "color-3", "color-4", "color-5", "color-6", "color-7"]
@@ -20,11 +19,12 @@ function displayGifs () {
         for (var i = 0; i < results.length; i++) {
         if (results[i].rating !== 'r' && results[i].rating !== 'pg-13') {
             var gifImg = $('<img>')
-            gifImg.attr('src', results[i].images.fixed_height.url).attr('id', "gif").addClass("rounded float-left m-2")
+            gifImg.attr('src', results[i].images.fixed_height_still.url).attr('id', "gif").addClass("rounded float-left m-2").attr('data-still', results[i].images.fixed_height_still.url).attr('data-animate', results[i].images.fixed_height.url).attr('data-state', "still")
             $('#gifResults').prepend(gifImg)
+            animate()
             }
         }
-    })    
+    })  
 }
 
 function showButtons() {
@@ -37,13 +37,7 @@ function showButtons() {
       $('.buttonDisplay').append(button)
       }
   }
-//setup AJAX call
 
-
-
-//create for loop that pulls items from button Arr and pushes them onscreen
-
-//create on click for search button that pushes the data into the array
 $('#search').on('click', function(event){
     event.preventDefault();
     var newBtn = $('#input').val().trim()
@@ -57,6 +51,20 @@ $('#search').on('click', function(event){
         showButtons()
     }
 })
+
+function animate() {
+    $('#gif').on('click', function() {
+        var state = $(this).attr('data-state');
+    
+        if (state === "still") {
+          $(this).attr('src', $(this).attr("data-animate"));
+          $(this).attr('data-state', "animate");
+        } else {
+          $(this).attr('src', $(this).attr("data-still"));
+          $(this).attr('data-state', "still");
+        }
+      });
+}
 
 $(document).on("click", '.btn-sm', showButtons, displayGifs)
 
