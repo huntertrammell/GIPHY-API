@@ -5,4 +5,4 @@ I pre-loaded a few buttons to onto the page and when selected it will make an AP
 
 This app demonstrates my ability to handle API calls as well as generating content dynamically onto the webpage.
 
-#Have fun!
+Have fun!
